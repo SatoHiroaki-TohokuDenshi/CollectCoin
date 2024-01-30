@@ -23,18 +23,12 @@ HRESULT Texture::Load(std::string fileName) {
 
 	//テクスチャを読み込む
 	hr = CoInitialize(NULL);
-	if (FAILED(hr)) {
-		return hr;
-	}
 	IWICImagingFactory *pFactory = NULL;
 	IWICBitmapDecoder *pDecoder = NULL;
 	IWICBitmapFrameDecode* pFrame = NULL;
 	IWICFormatConverter* pFormatConverter = NULL;
 	hr = CoCreateInstance(CLSID_WICImagingFactory, NULL, CLSCTX_INPROC_SERVER, IID_IWICImagingFactory, reinterpret_cast<void **>(&pFactory));
 	hr = CoInitialize(NULL);
-	if (FAILED(hr)) {
-		return hr;
-	}
 	hr = pFactory->CreateDecoderFromFilename(wtext, NULL, GENERIC_READ, WICDecodeMetadataCacheOnDemand, &pDecoder);
 	if(FAILED(hr)) {
 		char message[256];
@@ -66,10 +60,9 @@ HRESULT Texture::Load(std::string fileName) {
 	texdec.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
 	texdec.MiscFlags = 0;
 	hr = Direct3D::pDevice_->CreateTexture2D(&texdec, NULL, &pTexture);
+	if (FAILED(hr))
+		return E_FAIL;
 	hr = CoInitialize(NULL);
-	if (FAILED(hr)) {
-		return hr;
-	}
 
 	//テクスチャを送る
 	D3D11_MAPPED_SUBRESOURCE hMappedres;

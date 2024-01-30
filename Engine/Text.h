@@ -38,4 +38,10 @@ public:
 
 	//‰ğ•ú
 	void Release();
+
+	// 1•¶š‚Ì‰¡•‚ğæ“¾
+	int GetTextWidth() { return width_; };
+
+	// 1•¶š‚Ì‚‚³‚ğæ“¾
+	int GetTextHeight() { return height_; };
 };

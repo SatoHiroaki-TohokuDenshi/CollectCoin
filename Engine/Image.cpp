@@ -163,6 +163,15 @@ namespace Image {
 		return _datas[handle]->transform.GetWorldMatrix();
 	}
 
+	//‰æ‘œƒTƒCƒY‚ÌŽæ“¾
+	XMFLOAT3 GetImageSize(int handle) {
+		if (handle < 0 || handle >= _datas.size())
+		{
+			return { -1.0f, -1.0f, -1.0f };
+		}
+		return _datas[handle]->pSprite->GetTextureSize();
+	}
+
 	XMFLOAT3 CalcPixeltoPosition(int handle, int x, int y) {
 		if (handle < 0 || handle >= _datas.size()) {
 			return { 0.0f, 0.0f, 0.0f };
