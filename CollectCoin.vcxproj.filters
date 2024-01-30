@@ -106,6 +106,7 @@
     <ClCompile Include="TestScene.cpp">
       <Filter>03Scene</Filter>
     </ClCompile>
+    <ClCompile Include="Timer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\BoxCollider.h">
@@ -185,6 +186,7 @@
     <ClInclude Include="TestScene.h">
       <Filter>03Scene</Filter>
     </ClInclude>
+    <ClInclude Include="Timer.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Assets\Shader\Simple2D.hlsl">
