@@ -4,6 +4,26 @@
 //Playerを管理するクラス
 class Player : public GameObject {
 private:
+	int hModel_;	// モデル管理番号
+
+	//プレイヤーの状態
+	enum class ActionState {
+		IDLE = 0,	// 待機
+		MOVE,		// 移動
+		AIR,		// 空中
+		LAND,		// 着地
+	} state_;
+
+	//状態の更新
+	void UpdateState();
+	//待機
+	void UpdateIdle();
+	//移動
+	void UpdateMove();
+	//空中
+	void UpdateAir();
+	//着地
+	void UpdateLand();
 
 public:
 	//コンストラクタ
