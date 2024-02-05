@@ -14,6 +14,10 @@ private:
 		LAND,		// 着地
 	} state_;
 
+	XMFLOAT3 velocity_;	// 移動量
+	bool isOnFloor_;	// 床の上にいるか
+	int frame_;			// 着地硬直用カウント変数
+
 	//状態の更新
 	void UpdateState();
 	//待機
