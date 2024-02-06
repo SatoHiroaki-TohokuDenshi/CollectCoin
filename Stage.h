@@ -1,9 +1,12 @@
 #pragma once
+#include <vector>
 #include "Engine/GameObject.h"
 
 //Stageを管理するクラス
 class Stage : public GameObject {
 private:
+	int hModel_;    //モデル番号
+	std::vector<std::vector<int>> map_;
 
 public:
 	//コンストラクタ
@@ -23,4 +26,6 @@ public:
 
 	//開放
 	void Release() override;
+
+	int GetModelHandle() { return hModel_; }
 };
