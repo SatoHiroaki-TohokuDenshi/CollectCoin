@@ -14,9 +14,12 @@ private:
 		LAND,		// 着地
 	} state_;
 
-	XMFLOAT3 velocity_;	// 移動量
+	int moveCountX_;	// Xの移動量
+	int moveCountY_;	// Yの移動量
+	int moveCountZ_;	// Zの移動量
 	bool isOnFloor_;	// 床の上にいるか
 	int frame_;			// 着地硬直用カウント変数
+	GameObject* pStage_;
 
 	//状態の更新
 	void UpdateState();
@@ -28,6 +31,9 @@ private:
 	void UpdateAir();
 	//着地
 	void UpdateLand();
+
+	//位置情報の更新
+	void UpdatePosition();
 
 public:
 	//コンストラクタ

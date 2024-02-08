@@ -3,18 +3,18 @@
 #include "Engine/Model.h"
 #include "Engine/SphereCollider.h"
 
-#include "Stage.h"
 #include "Engine/Camera.h"
 
 namespace {
-	const float SPEED = 0.1f;
-	const float GRAVITY = 0.02f;
+	const float SPEED_UNIT_XZ = 0.1f;
+	const float SPEED_UNIT_Y = 0.02f;
 }
 
 //コンストラクタ
 Player::Player(GameObject* parent)
-	: GameObject(parent, "Player"), hModel_(-1) , state_(ActionState::IDLE)
-	, velocity_(0.0f, 0.0f, 0.0f), isOnFloor_(true), frame_(0)
+	: GameObject(parent, "Player"), hModel_(-1), pStage_(nullptr)
+	, state_(ActionState::IDLE), isOnFloor_(true), frame_(0)
+	, moveCountX_(0), moveCountY_(0), moveCountZ_(0)
 {
 }
 
@@ -29,7 +29,9 @@ void Player::Initialize() {
 	hModel_ = Model::Load("Model\\TestPlayer.fbx");
 	assert(hModel_ >= 0);
 
-	SphereCollider* collision = new SphereCollider(XMFLOAT3(1.5f, 0.6f, 0.5f), 0.6f);
+	pStage_ = FindObject("Stage");
+
+	SphereCollider* collision = new SphereCollider(XMFLOAT3(0.5f, 0.6f, 0.5f), 0.1f);
 	AddCollider(collision);
 }
 
@@ -50,12 +52,12 @@ void Player::Update() {
 		UpdateAir();
 		break;
 	case Player::ActionState::LAND:
+		UpdateLand();
 		break;
 	}
 
 	//位置を更新
-	transform_.position_ = transform_.position_ + velocity_;
-	Camera::SetPosition(transform_.position_ - XMFLOAT3(0.0f, 0.0f, 3.0f));
+	UpdatePosition();
 	Camera::SetTarget(transform_.position_);
 }
 
@@ -73,32 +75,22 @@ void Player::Release() {
 //何かに当たった
 void Player::OnCollision(GameObject* pTarget) {
 	if (pTarget->GetObjectName() == "Stage") {
-		if (velocity_.y < 0) {
-			velocity_.y = 0.0f;
-			isOnFloor_ = true;
+		if (moveCountY_ < 0) {
 			state_ = ActionState::LAND;
-
-			Stage* pStage = (Stage*)FindObject("Stage");    //ステージオブジェクトを探す
-			int hGroundModel = pStage->GetModelHandle();    //モデル番号を取得
-
-			RayCastData data;
-			//レイの発射位置
-			data.start = transform_.position_ + XMFLOAT3(0.0f, 3.0f, 0.0f);
-			data.dir = XMFLOAT3(0, -1, 0);			//レイの方向
-			Model::RayCast(hGroundModel, &data);	//レイを発射
-
-			if (data.hit) {
-				transform_.position_.y -= data.dist;
-			}
+			moveCountX_ = 0;
+			moveCountY_ = 0;
+			moveCountZ_ = 0;
+			isOnFloor_ = true;
 		}
 	}
 }
 
 //状態の更新
 void Player::UpdateState() {
-	velocity_.x = 0.0f;
-	velocity_.z = 0.0f;
-
+	//着地状態は内部で更新
+	if (state_ == ActionState::LAND) {
+		return;
+	}
 	//床の上にいない
 	if (!isOnFloor_) {
 		state_ = ActionState::AIR;
@@ -106,7 +98,7 @@ void Player::UpdateState() {
 	}
 	//スペースバー
 	if (Input::IsKeyDown(DIK_SPACE)) {
-		velocity_.y = 0.4f;
+		moveCountY_ = 30;
 		isOnFloor_ = false;
 		state_ = ActionState::AIR;
 		return;
@@ -124,55 +116,83 @@ void Player::UpdateState() {
 
 //待機
 void Player::UpdateIdle() {
-
+	moveCountX_ = 0;
+	moveCountY_ = 0;
+	moveCountZ_ = 0;
 }
 
 //移動
 void Player::UpdateMove() {
+	moveCountX_ = 0;
+	moveCountZ_ = 0;
+
 	if (Input::IsKey(DIK_D)) {
-		velocity_.x += SPEED;
+		moveCountX_ += 2;
 	}
 	if (Input::IsKey(DIK_A)) {
-		velocity_.x -= SPEED;
+		moveCountX_ -= 2;
 	}
 	if (Input::IsKey(DIK_W)) {
-		velocity_.z += SPEED;
+		moveCountZ_ += 2;
 	}
 	if (Input::IsKey(DIK_S)) {
-		velocity_.z -= SPEED;
+		moveCountZ_ -= 2;
 	}
 
 	//左コントロールが押されていればダッシュ
 	if (Input::IsKey(DIK_LCONTROL)) {
-		velocity_.x *= 2.0f;
-		velocity_.z *= 2.0f;
+		moveCountX_ *= 2;
+		moveCountZ_ *= 2;
 	}
 }
 
 //空中
 void Player::UpdateAir() {
+	moveCountX_ = 0;
+	moveCountZ_ = 0;
+
 	if (Input::IsKey(DIK_D)) {
-		velocity_.x += SPEED / 2.0f;
+		moveCountX_ += 1;
 	}
 	if (Input::IsKey(DIK_A)) {
-		velocity_.x -= SPEED / 2.0f;
+		moveCountX_ -= 1;
 	}
 	if (Input::IsKey(DIK_W)) {
-		velocity_.z += SPEED / 2.0f;
+		moveCountZ_ += 1;
 	}
 	if (Input::IsKey(DIK_S)) {
-		velocity_.z -= SPEED / 2.0f;
+		moveCountZ_ -= 1;
 	}
 
-	velocity_.y -= GRAVITY;
+	moveCountY_ -= 2;
 }
 
 //着地
 void Player::UpdateLand() {
-	if (frame_ < 10) {
+	if (frame_ < 30) {
 		frame_++;
 		return;
 	}
-
+	frame_ = 0;
 	state_ = ActionState::IDLE;
+}
+
+void Player::UpdatePosition() {
+	transform_.position_.x += SPEED_UNIT_XZ * moveCountX_;
+	transform_.position_.z += SPEED_UNIT_XZ * moveCountZ_;
+	if (moveCountY_ == 0)
+		return;
+	if (moveCountY_ > 0) {
+		for (int i = 0; i < moveCountY_; i++) {
+			transform_.position_.y += SPEED_UNIT_Y;
+		}
+	}
+	else {
+		for (int i = 0; i < abs(moveCountY_); i++) {
+			transform_.position_.y -= SPEED_UNIT_Y;
+			Collision(pStage_);
+			if (state_ == ActionState::LAND)
+				break;
+		}
+	}
 }
