@@ -14,7 +14,7 @@ namespace {
 Player::Player(GameObject* parent)
 	: GameObject(parent, "Player"), hModel_(-1), pStage_(nullptr)
 	, state_(ActionState::IDLE), isOnFloor_(true), frame_(0)
-	, moveCountX_(0), moveCountY_(0), moveCountZ_(0)
+	, moveCount_(0, 0, 0)
 {
 }
 
@@ -76,15 +76,13 @@ void Player::Release() {
 void Player::OnCollision(GameObject* pTarget) {
 	if (pTarget->GetObjectName() == "Stage") {
 		//上昇中なら終了
-		if (moveCountY_ > 0)
+		if (moveCount_.y > 0)
 			return;
-		if (moveCountY_ == 0)
+		if (moveCount_.y == 0)
 			isOnFloor_ = true;
-		if (moveCountY_ < 0) {
+		if (moveCount_.y < 0) {
 			state_ = ActionState::LAND;
-			moveCountX_ = 0;
-			moveCountY_ = 0;
-			moveCountZ_ = 0;
+			moveCount_ = { 0,0,0 };
 			isOnFloor_ = true;
 		}
 	}
@@ -107,7 +105,7 @@ void Player::UpdateState() {
 	}
 	//スペースバー
 	if (Input::IsKeyDown(DIK_SPACE)) {
-		moveCountY_ = 30;
+		moveCount_.y = 30;
 		isOnFloor_ = false;
 		state_ = ActionState::AIR;
 		return;
@@ -125,55 +123,53 @@ void Player::UpdateState() {
 
 //待機
 void Player::UpdateIdle() {
-	moveCountX_ = 0;
-	moveCountY_ = 0;
-	moveCountZ_ = 0;
+	moveCount_ = { 0,0,0 };
 }
 
 //移動
 void Player::UpdateMove() {
-	moveCountX_ = 0;
-	moveCountZ_ = 0;
+	moveCount_.x = 0;
+	moveCount_.z = 0;
 
 	if (Input::IsKey(DIK_D)) {
-		moveCountX_ += 2;
+		moveCount_.x += 2;
 	}
 	if (Input::IsKey(DIK_A)) {
-		moveCountX_ -= 2;
+		moveCount_.x -= 2;
 	}
 	if (Input::IsKey(DIK_W)) {
-		moveCountZ_ += 2;
+		moveCount_.z += 2;
 	}
 	if (Input::IsKey(DIK_S)) {
-		moveCountZ_ -= 2;
+		moveCount_.z -= 2;
 	}
 
 	//左コントロールが押されていればダッシュ
 	if (Input::IsKey(DIK_LCONTROL)) {
-		moveCountX_ *= 2;
-		moveCountZ_ *= 2;
+		moveCount_.x *= 2;
+		moveCount_.z *= 2;
 	}
 }
 
 //空中
 void Player::UpdateAir() {
-	moveCountX_ = 0;
-	moveCountZ_ = 0;
+	moveCount_.x = 0;
+	moveCount_.z = 0;
 
 	if (Input::IsKey(DIK_D)) {
-		moveCountX_ += 1;
+		moveCount_.x += 1;
 	}
 	if (Input::IsKey(DIK_A)) {
-		moveCountX_ -= 1;
+		moveCount_.x -= 1;
 	}
 	if (Input::IsKey(DIK_W)) {
-		moveCountZ_ += 1;
+		moveCount_.z += 1;
 	}
 	if (Input::IsKey(DIK_S)) {
-		moveCountZ_ -= 1;
+		moveCount_.z -= 1;
 	}
 
-	moveCountY_ -= 2;
+	moveCount_.y -= 2;
 }
 
 //着地
@@ -187,17 +183,17 @@ void Player::UpdateLand() {
 }
 
 void Player::UpdatePosition() {
-	transform_.position_.x += SPEED_UNIT_XZ * moveCountX_;
-	transform_.position_.z += SPEED_UNIT_XZ * moveCountZ_;
-	if (moveCountY_ == 0)
+	transform_.position_.x += SPEED_UNIT_XZ * moveCount_.x;
+	transform_.position_.z += SPEED_UNIT_XZ * moveCount_.z;
+	if (moveCount_.y == 0)
 		return;
-	if (moveCountY_ > 0) {
-		for (int i = 0; i < moveCountY_; i++) {
+	if (moveCount_.y > 0) {
+		for (int i = 0; i < moveCount_.y; i++) {
 			transform_.position_.y += SPEED_UNIT_Y;
 		}
 	}
 	else {
-		for (int i = 0; i < abs(moveCountY_); i++) {
+		for (int i = 0; i < abs(moveCount_.y); i++) {
 			transform_.position_.y -= SPEED_UNIT_Y;
 			Collision(pStage_);
 			if (state_ == ActionState::LAND)

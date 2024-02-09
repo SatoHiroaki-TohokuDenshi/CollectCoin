@@ -14,9 +14,7 @@ private:
 		LAND,		// 着地
 	} state_;
 
-	int moveCountX_;	// Xの移動量
-	int moveCountY_;	// Yの移動量
-	int moveCountZ_;	// Zの移動量
+	XMINT3 moveCount_;
 	bool isOnFloor_;	// 床の上にいるか
 	int frame_;			// 着地硬直用カウント変数
 	GameObject* pStage_;

@@ -27,6 +27,9 @@
     <Filter Include="03Scene">
       <UniqueIdentifier>{e58d140b-946c-4c28-b57e-24dfe583da0d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="04State">
+      <UniqueIdentifier>{ff00f70d-6e2f-418f-b178-419e9fd7e52c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\BoxCollider.cpp">
@@ -189,7 +192,9 @@
     </ClInclude>
     <ClInclude Include="Timer.h" />
     <ClInclude Include="Button.h" />
-    <ClInclude Include="StateBase.h" />
+    <ClInclude Include="StateBase.h">
+      <Filter>04State</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Assets\Shader\Simple2D.hlsl">
