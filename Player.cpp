@@ -75,6 +75,11 @@ void Player::Release() {
 //何かに当たった
 void Player::OnCollision(GameObject* pTarget) {
 	if (pTarget->GetObjectName() == "Stage") {
+		//上昇中なら終了
+		if (moveCountY_ > 0)
+			return;
+		if (moveCountY_ == 0)
+			isOnFloor_ = true;
 		if (moveCountY_ < 0) {
 			state_ = ActionState::LAND;
 			moveCountX_ = 0;
@@ -87,6 +92,10 @@ void Player::OnCollision(GameObject* pTarget) {
 
 //状態の更新
 void Player::UpdateState() {
+	//床の上にいるかを判定
+	isOnFloor_ = false;
+	Collision(pStage_);
+
 	//着地状態は内部で更新
 	if (state_ == ActionState::LAND) {
 		return;
@@ -169,7 +178,7 @@ void Player::UpdateAir() {
 
 //着地
 void Player::UpdateLand() {
-	if (frame_ < 30) {
+	if (frame_ < 5) {
 		frame_++;
 		return;
 	}
