@@ -183,6 +183,7 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayScene.h" />
     <ClInclude Include="Stage.h" />
+    <ClInclude Include="StateBase.h" />
     <ClInclude Include="TestScene.h" />
     <ClInclude Include="Timer.h" />
   </ItemGroup>

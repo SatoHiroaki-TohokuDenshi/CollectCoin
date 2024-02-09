@@ -189,6 +189,7 @@
     </ClInclude>
     <ClInclude Include="Timer.h" />
     <ClInclude Include="Button.h" />
+    <ClInclude Include="StateBase.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Assets\Shader\Simple2D.hlsl">
