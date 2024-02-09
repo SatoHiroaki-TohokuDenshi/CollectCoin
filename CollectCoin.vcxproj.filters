@@ -111,6 +111,21 @@
     </ClCompile>
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="Button.cpp" />
+    <ClCompile Include="StateManager.cpp">
+      <Filter>04State</Filter>
+    </ClCompile>
+    <ClCompile Include="StateIdle.cpp">
+      <Filter>04State</Filter>
+    </ClCompile>
+    <ClCompile Include="StateMove.cpp">
+      <Filter>04State</Filter>
+    </ClCompile>
+    <ClCompile Include="StateAir.cpp">
+      <Filter>04State</Filter>
+    </ClCompile>
+    <ClCompile Include="StateLand.cpp">
+      <Filter>04State</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\BoxCollider.h">
@@ -193,6 +208,21 @@
     <ClInclude Include="Timer.h" />
     <ClInclude Include="Button.h" />
     <ClInclude Include="StateBase.h">
+      <Filter>04State</Filter>
+    </ClInclude>
+    <ClInclude Include="StateManager.h">
+      <Filter>04State</Filter>
+    </ClInclude>
+    <ClInclude Include="StateIdle.h">
+      <Filter>04State</Filter>
+    </ClInclude>
+    <ClInclude Include="StateMove.h">
+      <Filter>04State</Filter>
+    </ClInclude>
+    <ClInclude Include="StateAir.h">
+      <Filter>04State</Filter>
+    </ClInclude>
+    <ClInclude Include="StateLand.h">
       <Filter>04State</Filter>
     </ClInclude>
   </ItemGroup>

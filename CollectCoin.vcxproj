@@ -152,6 +152,11 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayScene.cpp" />
     <ClCompile Include="Stage.cpp" />
+    <ClCompile Include="StateAir.cpp" />
+    <ClCompile Include="StateIdle.cpp" />
+    <ClCompile Include="StateLand.cpp" />
+    <ClCompile Include="StateManager.cpp" />
+    <ClCompile Include="StateMove.cpp" />
     <ClCompile Include="TestScene.cpp" />
     <ClCompile Include="Timer.cpp" />
   </ItemGroup>
@@ -183,7 +188,12 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayScene.h" />
     <ClInclude Include="Stage.h" />
+    <ClInclude Include="StateAir.h" />
     <ClInclude Include="StateBase.h" />
+    <ClInclude Include="StateIdle.h" />
+    <ClInclude Include="StateLand.h" />
+    <ClInclude Include="StateManager.h" />
+    <ClInclude Include="StateMove.h" />
     <ClInclude Include="TestScene.h" />
     <ClInclude Include="Timer.h" />
   </ItemGroup>

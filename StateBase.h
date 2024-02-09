@@ -1,5 +1,5 @@
 #pragma once
-#include <vector>
+#include <DirectXMath.h>
 
 //状態を表すインターフェース
 class State {
@@ -9,7 +9,7 @@ public:
 	//デストラクタ
 	virtual ~State() = 0;
 	//行動
-	virtual void Action(std::vector<int>& count) = 0;
+	virtual void Action(DirectX::XMINT3& count) = 0;
 	//次のステート
 	virtual State* GetNextState() = 0;
 };
