@@ -17,4 +17,7 @@ public:
 	void UpdateState();
 	//s“®
 	void Action(DirectX::XMINT3& count);
+
+	//’…’n
+	void SetStateLand();
 };

@@ -1,6 +1,7 @@
 #include "StateManager.h"
 #include <utility>
 #include "StateIdle.h"
+#include "StateLand.h"
 
 StateManager::StateManager() {
 	myState_ = new StateIdle();
@@ -25,4 +26,9 @@ void StateManager::UpdateState() {
 
 void StateManager::Action(DirectX::XMINT3& count) {
 	myState_->Action(count);
+}
+
+void StateManager::SetStateLand() {
+	delete myState_;
+	myState_ = new StateLand();
 }

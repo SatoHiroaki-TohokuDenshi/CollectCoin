@@ -5,6 +5,7 @@
 class StateAir :
     public State {
 private:
+	bool frag_;
 
 public:
 	StateAir();

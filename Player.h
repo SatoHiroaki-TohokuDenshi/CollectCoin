@@ -1,34 +1,21 @@
 #pragma once
 #include "Engine/GameObject.h"
 
+//前方宣言
+class StateManager;
+
 //Playerを管理するクラス
 class Player : public GameObject {
 private:
 	int hModel_;	// モデル管理番号
-
-	//プレイヤーの状態
-	enum class ActionState {
-		IDLE = 0,	// 待機
-		MOVE,		// 移動
-		AIR,		// 空中
-		LAND,		// 着地
-	} state_;
 
 	XMINT3 moveCount_;
 	bool isOnFloor_;	// 床の上にいるか
 	int frame_;			// 着地硬直用カウント変数
 	GameObject* pStage_;
 
-	//状態の更新
-	void UpdateState();
-	//待機
-	void UpdateIdle();
-	//移動
-	void UpdateMove();
-	//空中
-	void UpdateAir();
-	//着地
-	void UpdateLand();
+	//ステート管理
+	StateManager* pManager_;
 
 	//位置情報の更新
 	void UpdatePosition();

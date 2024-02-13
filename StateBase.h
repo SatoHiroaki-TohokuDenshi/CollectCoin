@@ -7,7 +7,7 @@ private:
 
 public:
 	//デストラクタ
-	virtual ~State() = 0;
+	virtual ~State() {};
 	//行動
 	virtual void Action(DirectX::XMINT3& count) = 0;
 	//次のステート

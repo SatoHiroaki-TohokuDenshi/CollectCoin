@@ -5,6 +5,7 @@
 class StateLand :
 	public State {
 private:
+	int frame_;	//ƒtƒŒ[ƒ€”
 
 public:
 	StateLand();
