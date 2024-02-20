@@ -1,7 +1,7 @@
 #pragma once
 #include "StateBase.h"
 
-//‘Ò‹@ó‘Ô
+//—‰ºó‘Ô
 class StateFall :
 	public State {
 private:

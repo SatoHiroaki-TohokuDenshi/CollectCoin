@@ -19,7 +19,7 @@ public:
 	void Action(DirectX::XMINT3& count);
 	
 	//“¥‚ÝŠO‚µ‚½
-	void SetStateAir();
+	void SetStateFall();
 
 	//’…’n
 	void SetStateLand();

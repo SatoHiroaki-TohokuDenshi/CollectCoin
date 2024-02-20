@@ -18,7 +18,7 @@ void StateIdle::Action(DirectX::XMINT3& count) {
 State* StateIdle::GetNextState() {
 	//ƒWƒƒƒ“ƒv
 	if (Input::IsKeyDown(DIK_SPACE))
-		return new StateAir();
+		return new StateJump();
 
 	//ˆÚ“®
 	if (Input::IsKey(DIK_W) || Input::IsKey(DIK_A) ||

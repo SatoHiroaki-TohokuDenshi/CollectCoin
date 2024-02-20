@@ -27,9 +27,9 @@ void StateManager::Action(DirectX::XMINT3& count) {
 	myState_->Action(count);
 }
 
-void StateManager::SetStateAir() {
+void StateManager::SetStateFall() {
 	delete myState_;
-	myState_ = new StateJump();
+	myState_ = new StateFall();
 }
 
 void StateManager::SetStateLand() {

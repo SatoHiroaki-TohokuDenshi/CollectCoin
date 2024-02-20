@@ -1,11 +1,10 @@
 #pragma once
 #include "StateBase.h"
 
-//‹ó’†ó‘Ô
+//ƒWƒƒƒ“ƒv‚µ‚½uŠÔ
 class StateJump :
     public State {
 private:
-	bool frag_;
 
 public:
 	StateJump();

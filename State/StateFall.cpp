@@ -12,9 +12,26 @@ StateFall::~StateFall() {
 }
 
 void StateFall::Action(DirectX::XMINT3& count) {
-	count = { 0,0,0 };
+	count.x = 0;
+	count.z = 0;
+
+	if (Input::IsKey(DIK_D)) {
+		count.x += 1;
+	}
+	if (Input::IsKey(DIK_A)) {
+		count.x -= 1;
+	}
+	if (Input::IsKey(DIK_W)) {
+		count.z += 1;
+	}
+	if (Input::IsKey(DIK_S)) {
+		count.z -= 1;
+	}
+
+	count.y -= 2;
 }
 
 State* StateFall::GetNextState() {
+	//Player‘¤‚©‚ç’…’n‚ÉˆÚs
 	return nullptr;
 }

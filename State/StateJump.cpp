@@ -3,8 +3,7 @@
 
 #include "../Engine/Input.h"
 
-StateJump::StateJump()
-	: frag_(true) {
+StateJump::StateJump() {
 
 }
 
@@ -13,10 +12,7 @@ StateJump::~StateJump() {
 }
 
 void StateJump::Action(DirectX::XMINT3& count) {
-	if (frag_) {
-		frag_ = false;
-		count.y = 30;
-	}
+	count.y = 30;
 
 	count.x = 0;
 	count.z = 0;
@@ -38,5 +34,6 @@ void StateJump::Action(DirectX::XMINT3& count) {
 }
 
 State* StateJump::GetNextState() {
-	return nullptr;
+	//‚·‚®—‰ºó‘Ô‚ÉˆÚs
+	return new StateFall();;
 }
