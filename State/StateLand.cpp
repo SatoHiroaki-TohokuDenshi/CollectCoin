@@ -1,5 +1,5 @@
 #include "StateLand.h"
-#include "StateIdle.h"
+#include "States.h"
 
 StateLand::StateLand()
 	: frame_(0) {

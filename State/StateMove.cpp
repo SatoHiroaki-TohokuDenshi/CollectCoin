@@ -1,6 +1,5 @@
 #include "StateMove.h"
-#include "StateAir.h"
-#include "StateIdle.h"
+#include "States.h"
 
 #include "../Engine/Input.h"
 
@@ -39,7 +38,7 @@ void StateMove::Action(DirectX::XMINT3& count) {
 State* StateMove::GetNextState() {
 	//ジャンプ
 	if (Input::IsKeyDown(DIK_SPACE))
-		return new StateAir();
+		return new StateJump();
 
 	//移動なら更新無し
 	if (Input::IsKey(DIK_W) || Input::IsKey(DIK_A) ||

@@ -1,6 +1,5 @@
 #include "StateIdle.h"
-#include "StateAir.h"
-#include "StateMove.h"
+#include "States.h"
 
 #include "../Engine/Input.h"
 

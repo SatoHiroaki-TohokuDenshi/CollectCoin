@@ -32,12 +32,17 @@ void Player::Initialize() {
 
 	pStage_ = FindObject("Stage");
 
-	SphereCollider* collision = new SphereCollider(XMFLOAT3(0.5f, 0.6f, 0.5f), 0.1f);
+	SphereCollider* collision = new SphereCollider(XMFLOAT3(0.5f, 0.58f, 0.5f), 0.1f);
 	AddCollider(collision);
 }
 
 //更新
 void Player::Update() {
+	isOnFloor_ = false;
+	Collision(pStage_);
+	if (!isOnFloor_)
+		pManager_->SetStateAir();
+
 	//状態の更新
 	pManager_->UpdateState();
 
@@ -46,6 +51,7 @@ void Player::Update() {
 
 	//位置を更新
 	UpdatePosition();
+	Camera::SetPosition(XMFLOAT3(transform_.position_.x, transform_.position_.y, transform_.position_.z - 1.0f));
 	Camera::SetTarget(transform_.position_);
 }
 

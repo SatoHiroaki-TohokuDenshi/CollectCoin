@@ -152,7 +152,8 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayScene.cpp" />
     <ClCompile Include="Stage.cpp" />
-    <ClCompile Include="State\StateAir.cpp" />
+    <ClCompile Include="State\StateJump.cpp" />
+    <ClCompile Include="State\StateFall.cpp" />
     <ClCompile Include="State\StateIdle.cpp" />
     <ClCompile Include="State\StateLand.cpp" />
     <ClCompile Include="State\StateManager.cpp" />
@@ -188,12 +189,14 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayScene.h" />
     <ClInclude Include="Stage.h" />
-    <ClInclude Include="State\StateAir.h" />
+    <ClInclude Include="State\StateJump.h" />
     <ClInclude Include="State\StateBase.h" />
+    <ClInclude Include="State\StateFall.h" />
     <ClInclude Include="State\StateIdle.h" />
     <ClInclude Include="State\StateLand.h" />
     <ClInclude Include="State\StateManager.h" />
     <ClInclude Include="State\StateMove.h" />
+    <ClInclude Include="State\States.h" />
     <ClInclude Include="TestScene.h" />
     <ClInclude Include="Timer.h" />
   </ItemGroup>

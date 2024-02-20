@@ -1,15 +1,14 @@
 #pragma once
 #include "StateBase.h"
 
-//‹ó’†ó‘Ô
-class StateAir :
-    public State {
+//‘Ò‹@ó‘Ô
+class StateFall :
+	public State {
 private:
-	bool frag_;
 
 public:
-	StateAir();
-	virtual ~StateAir();
+	StateFall();
+	virtual ~StateFall();
 
 	//s“®
 	virtual void Action(DirectX::XMINT3& count) override;

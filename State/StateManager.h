@@ -17,6 +17,9 @@ public:
 	void UpdateState();
 	//s“®
 	void Action(DirectX::XMINT3& count);
+	
+	//“¥‚İŠO‚µ‚½
+	void SetStateAir();
 
 	//’…’n
 	void SetStateLand();

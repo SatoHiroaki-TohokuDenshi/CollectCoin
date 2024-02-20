@@ -1,16 +1,18 @@
-#include "StateAir.h"
+#include "StateJump.h"
+#include "States.h"
+
 #include "../Engine/Input.h"
 
-StateAir::StateAir()
+StateJump::StateJump()
 	: frag_(true) {
 
 }
 
-StateAir::~StateAir() {
+StateJump::~StateJump() {
 
 }
 
-void StateAir::Action(DirectX::XMINT3& count) {
+void StateJump::Action(DirectX::XMINT3& count) {
 	if (frag_) {
 		frag_ = false;
 		count.y = 30;
@@ -35,6 +37,6 @@ void StateAir::Action(DirectX::XMINT3& count) {
 	count.y -= 2;
 }
 
-State* StateAir::GetNextState() {
+State* StateJump::GetNextState() {
 	return nullptr;
 }
