@@ -4,7 +4,7 @@
 #include "Engine/SphereCollider.h"
 #include "State/StateManager.h"
 
-#include "Engine/Camera.h"
+#include "CameraController.h"
 
 namespace {
 	const float SPEED_UNIT_XZ = 0.1f;
@@ -34,6 +34,7 @@ void Player::Initialize() {
 
 	SphereCollider* collision = new SphereCollider(XMFLOAT3(0.5f, 0.58f, 0.5f), 0.1f);
 	AddCollider(collision);
+	Instantiate<CameraController>(this);
 }
 
 //更新
@@ -51,7 +52,6 @@ void Player::Update() {
 
 	//位置を更新
 	UpdatePosition();
-	Camera::SetTarget(transform_.position_);
 }
 
 //描画

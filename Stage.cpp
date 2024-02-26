@@ -20,15 +20,23 @@ void Stage::Initialize() {
 	hModel_ = Model::Load("Model\\TestGround.fbx");
 	assert(hModel_ >= 0);
 
-	CsvReader csv;
-	csv.Load("Map.csv");
-	map_.resize(csv.GetHeight());
-	for (int h = 0; h < map_.size(); h++) {
-		map_[h].resize(csv.GetWidth());
-		for (int w = 0; w < map_[h].size(); w++) {
-			map_[h][w] = csv.GetValue(h, w);
-			BoxCollider* collision = new BoxCollider(XMFLOAT3((float)w + 0.5f, -0.5f, (float)h + 0.5f), XMFLOAT3(1, 1, 1));
-			AddCollider(collision);
+	std::string fileName = "map0";
+	map_.resize(2);
+	for (int y = 0; y < map_.size(); y++) {
+		//マップデータの読み込み
+		CsvReader csv{};
+		csv.Load(fileName + std::to_string(y) + ".csv");
+
+		map_[y].resize(csv.GetWidth());
+		for (int x = 0; x < map_[y].size(); x++) {
+			map_[y][x].resize(csv.GetHeight());
+			for (int z = 0; z < map_[y][x].size(); z++) {
+				map_[y][x][z] = csv.GetValue(x, z);
+				if (map_[y][x][z] == 1) {
+					BoxCollider* collision = new BoxCollider(XMFLOAT3((float)x + 0.5f, (float)y - 0.5f, (float)z + 0.5f), XMFLOAT3(1, 1, 1));
+					AddCollider(collision);
+				}
+			}
 		}
 	}
 }
@@ -42,11 +50,15 @@ void Stage::Update() {
 void Stage::Draw() {
 	Transform t{};
 
-	for (int h = 0; h < map_.size(); h++) {
-		for (int w = 0; w < map_[h].size(); w++) {
-			t.position_ = { (float)w, 0.0f, (float)h };
-			Model::SetTransform(hModel_, t);
-			Model::Draw(hModel_);
+	for (int y = 0; y < map_.size(); y++) {
+		for (int x = 0; x < map_[y].size(); x++) {
+			for (int z = 0; z < map_[y][x].size(); z++) {
+				if (map_[y][x][z] == 1) {
+					t.position_ = { (float)x, (float)y, (float)z };
+					Model::SetTransform(hModel_, t);
+					Model::Draw(hModel_);
+				}
+			}
 		}
 	}
 }

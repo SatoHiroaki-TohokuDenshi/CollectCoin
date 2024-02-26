@@ -1,19 +1,16 @@
 #pragma once
-#include <vector>
 #include "Engine/GameObject.h"
 
-//Stageを管理するクラス
-class Stage : public GameObject {
+//カメラの動作を管理するクラス
+class CameraController : public GameObject {
 private:
-	int hModel_;    //モデル番号
-	std::vector<std::vector<std::vector<int>>> map_;
 
 public:
 	//コンストラクタ
-	Stage(GameObject* parent);
+	CameraController(GameObject* parent);
 
 	//デストラクタ
-	~Stage();
+	~CameraController();
 
 	//初期化
 	void Initialize() override;

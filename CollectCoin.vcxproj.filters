@@ -111,9 +111,6 @@
     </ClCompile>
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="Button.cpp" />
-    <ClCompile Include="State\StateAir.cpp">
-      <Filter>04State</Filter>
-    </ClCompile>
     <ClCompile Include="State\StateIdle.cpp">
       <Filter>04State</Filter>
     </ClCompile>
@@ -126,6 +123,9 @@
     <ClCompile Include="State\StateMove.cpp">
       <Filter>04State</Filter>
     </ClCompile>
+    <ClCompile Include="State\StateJump.cpp" />
+    <ClCompile Include="State\StateFall.cpp" />
+    <ClCompile Include="CameraController.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\BoxCollider.h">
@@ -207,9 +207,6 @@
     </ClInclude>
     <ClInclude Include="Timer.h" />
     <ClInclude Include="Button.h" />
-    <ClInclude Include="State\StateAir.h">
-      <Filter>04State</Filter>
-    </ClInclude>
     <ClInclude Include="State\StateBase.h">
       <Filter>04State</Filter>
     </ClInclude>
@@ -225,6 +222,10 @@
     <ClInclude Include="State\StateMove.h">
       <Filter>04State</Filter>
     </ClInclude>
+    <ClInclude Include="State\StateJump.h" />
+    <ClInclude Include="State\StateFall.h" />
+    <ClInclude Include="State\States.h" />
+    <ClInclude Include="CameraController.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Assets\Shader\Simple2D.hlsl">

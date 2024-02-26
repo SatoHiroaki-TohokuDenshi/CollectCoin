@@ -30,14 +30,14 @@ public:
 
 
 	//指定した位置のデータを文字列で取得
-	//引数：x,y　取得したい位置
+	//引数：w,h　取得したい位置
 	//戻値：取得した文字列
-	std::string GetString(DWORD x, DWORD y);
+	std::string GetString(DWORD w, DWORD h);
 
 	//指定した位置のデータを整数で取得
-	//引数：x,y　取得したい位置
+	//引数：w,h　取得したい位置
 	//戻値：取得した値
-	int GetValue(DWORD x, DWORD y);
+	int GetValue(DWORD w, DWORD h);
 
 	//ファイルの列数を取得
 	//引数：なし
