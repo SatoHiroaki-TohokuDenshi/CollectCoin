@@ -102,6 +102,7 @@ void Player::UpdatePosition() {
 	//Œ»Ý’n‚ÌXV
 	vPos += vMove;
 	XMStoreFloat3(&transform_.position_, vPos);
+	pCamera_->SetPosition(transform_.position_);
 
 	if (moveCount_.y == 0)
 		return;
