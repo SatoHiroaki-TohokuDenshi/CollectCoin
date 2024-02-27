@@ -21,15 +21,19 @@ void CameraController::Initialize() {
 //XV
 void CameraController::Update() {
 	//‰ñ“]ˆ—
-	if (Input::IsKey(DIK_LEFT))
-		transform_.rotate_.y -= 2.0f;
-	if (Input::IsKey(DIK_RIGHT))
-		transform_.rotate_.y += 2.0f;
+	XMFLOAT3 mouseMove = Input::GetMouseMove();
+	transform_.rotate_.x += mouseMove.y;
+	transform_.rotate_.y += mouseMove.x;
 
-	if (Input::IsKey(DIK_UP))
-		transform_.rotate_.x += 2.0f;
-	if (Input::IsKey(DIK_DOWN))
-		transform_.rotate_.x -= 2.0f;
+	//if (Input::IsKey(DIK_LEFT))
+	//	transform_.rotate_.y -= 2.0f;
+	//if (Input::IsKey(DIK_RIGHT))
+	//	transform_.rotate_.y += 2.0f;
+
+	//if (Input::IsKey(DIK_UP))
+	//	transform_.rotate_.x += 2.0f;
+	//if (Input::IsKey(DIK_DOWN))
+	//	transform_.rotate_.x -= 2.0f;
 
 	if (transform_.rotate_.x >= 60.0f) transform_.rotate_.x = 60.0f;
 	if (transform_.rotate_.x <= -90.0f) transform_.rotate_.x = -89.0f;
