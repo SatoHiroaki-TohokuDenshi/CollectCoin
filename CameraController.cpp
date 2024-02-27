@@ -22,8 +22,8 @@ void CameraController::Initialize() {
 void CameraController::Update() {
 	//‰ñ“]ˆ—
 	XMFLOAT3 mouseMove = Input::GetMouseMove();
-	transform_.rotate_.x += mouseMove.y;
-	transform_.rotate_.y += mouseMove.x;
+	transform_.rotate_.x += mouseMove.y / 3.0f;
+	transform_.rotate_.y += mouseMove.x / 3.0f;
 
 	//if (Input::IsKey(DIK_LEFT))
 	//	transform_.rotate_.y -= 2.0f;
@@ -35,8 +35,8 @@ void CameraController::Update() {
 	//if (Input::IsKey(DIK_DOWN))
 	//	transform_.rotate_.x -= 2.0f;
 
-	if (transform_.rotate_.x >= 60.0f) transform_.rotate_.x = 60.0f;
-	if (transform_.rotate_.x <= -90.0f) transform_.rotate_.x = -89.0f;
+	if (transform_.rotate_.x >= 20.0f) transform_.rotate_.x = 20.0f;
+	if (transform_.rotate_.x <= -40.0f) transform_.rotate_.x = -40.0f;
 
 	//Œ»Ý’nî•ñ‚ðƒxƒNƒgƒ‹Œ^‚É•ÏŠ·
 	XMVECTOR vPos = XMLoadFloat3(&transform_.position_);
