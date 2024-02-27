@@ -15,7 +15,7 @@ namespace {
 Player::Player(GameObject* parent)
 	: GameObject(parent, "Player"), hModel_(-1), pStage_(nullptr)
 	, isOnFloor_(true), frame_(0), moveCount_(0, 0, 0)
-	, pManager_(new StateManager)
+	, pManager_(new StateManager), pCamera_(nullptr)
 {
 }
 
@@ -34,7 +34,7 @@ void Player::Initialize() {
 
 	SphereCollider* collision = new SphereCollider(XMFLOAT3(0.5f, 0.58f, 0.5f), 0.1f);
 	AddCollider(collision);
-	Instantiate<CameraController>(this);
+	pCamera_ = Instantiate<CameraController>(this);
 }
 
 //更新
@@ -82,8 +82,27 @@ void Player::OnCollision(GameObject* pTarget) {
 }
 
 void Player::UpdatePosition() {
-	transform_.position_.x += SPEED_UNIT_XZ * moveCount_.x;
-	transform_.position_.z += SPEED_UNIT_XZ * moveCount_.z;
+	//現在地のベクトル
+	XMVECTOR vPos = XMLoadFloat3(&transform_.position_);
+
+	//移動量のベクトル
+	XMVECTOR vMove = {
+		SPEED_UNIT_XZ * moveCount_.x,
+		0.0f,
+		SPEED_UNIT_XZ * moveCount_.z,
+		0.0f
+	};
+
+	//カメラの向きに変形させる行列
+	XMMATRIX mRotateY = XMMatrixRotationY(XMConvertToRadians(pCamera_->GetRotate().y));
+
+	//移動ベクトルを変形
+	vMove = XMVector3TransformCoord(vMove, mRotateY);
+
+	//現在地の更新
+	vPos += vMove;
+	XMStoreFloat3(&transform_.position_, vPos);
+
 	if (moveCount_.y == 0)
 		return;
 	if (moveCount_.y > 0) {

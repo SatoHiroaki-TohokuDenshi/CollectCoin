@@ -3,6 +3,7 @@
 
 //前方宣言
 class StateManager;
+class CameraController;
 
 //Playerを管理するクラス
 class Player : public GameObject {
@@ -16,6 +17,9 @@ private:
 
 	//ステート管理
 	StateManager* pManager_;
+
+	//カメラ管理
+	CameraController* pCamera_;
 
 	//位置情報の更新
 	void UpdatePosition();
