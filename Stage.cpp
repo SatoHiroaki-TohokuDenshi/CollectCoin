@@ -30,8 +30,9 @@ void Stage::Initialize() {
 		map_[y].resize(csv.GetWidth());
 		for (int x = 0; x < map_[y].size(); x++) {
 			map_[y][x].resize(csv.GetHeight());
+			int h = (int)map_[y][x].size() - 1;
 			for (int z = 0; z < map_[y][x].size(); z++) {
-				map_[y][x][z] = csv.GetValue(x, z);
+				map_[y][x][z] = csv.GetValue(x, h--);
 				if (map_[y][x][z] == 1) {
 					BoxCollider* collision = new BoxCollider(XMFLOAT3((float)x + 0.5f, (float)y - 0.5f, (float)z + 0.5f), XMFLOAT3(1, 1, 1));
 					AddCollider(collision);
