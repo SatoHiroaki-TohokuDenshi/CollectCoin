@@ -45,6 +45,7 @@ void Button::Draw() {
 
 	Transform t{};
 	t.position_ = { px, py, 0.0f };
+	t.scale_ = transform_.scale_;
 
 	int index = 0;
 	if (IsHovered()) {
@@ -66,7 +67,7 @@ void Button::Draw() {
 
 // ŠJ•ú
 void Button::Release() {
-	pText_->Release();
+
 }
 
 void Button::LoadFile(std::string fileName) {
@@ -96,4 +97,8 @@ bool Button::IsHovered() {
 
 void Button::SetText(std::string t) {
 	txt_ = t;
+}
+
+bool Button::isClicked() {
+	return (IsHovered() && Input::IsMouseButtonDown(0));
 }

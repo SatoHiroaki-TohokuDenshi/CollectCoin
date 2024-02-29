@@ -269,8 +269,6 @@ void GameObject::UpdateSub() {
 
 //Draw関数を再帰的に呼び出す
 void GameObject::DrawSub() {
-	Draw();
-
 	//リリース時は削除
 #ifdef _DEBUG
 		//コリジョンの描画
@@ -283,6 +281,8 @@ void GameObject::DrawSub() {
 	for (auto it = childList_.begin(); it != childList_.end(); it++) {
 		(*it)->DrawSub();
 	}
+
+	Draw();
 }
 
 void GameObject::ReleaseSub() {

@@ -1,9 +1,16 @@
 #pragma once
 #include "Engine/GameObject.h"
 
+class Button;
+
 //タイトルシーンを管理するクラス
 class TitleScene : public GameObject {
 private:
+	int hPict_;    //画像番号
+	Button* pButton_;
+	bool isMoveScene_;
+	int hBlack_;
+	int frame_;
 
 public:
 	//コンストラクタ
@@ -21,4 +28,7 @@ public:
 
 	//開放
 	void Release() override;
+
+	//シーン遷移
+	void MoveNextScene();
 };

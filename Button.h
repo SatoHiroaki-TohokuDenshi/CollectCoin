@@ -48,4 +48,7 @@ public:
 
 	// •\¦•¶š—ñ‚Ìİ’è
 	void SetText(std::string t);
+
+public:
+	bool isClicked();
 };
