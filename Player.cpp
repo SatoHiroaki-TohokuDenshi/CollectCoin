@@ -16,6 +16,7 @@ Player::Player(GameObject* parent)
 	: GameObject(parent, "Player"), hModel_(-1), pStage_(nullptr)
 	, isOnFloor_(true), frame_(0), moveCount_(0, 0, 0)
 	, pManager_(new StateManager), pCamera_(nullptr)
+	, countCoin_(0)
 {
 }
 
@@ -79,6 +80,9 @@ void Player::OnCollision(GameObject* pTarget) {
 			isOnFloor_ = true;
 		}
 	}
+
+	if (pTarget->GetObjectName() == "Coin")
+		countCoin_++;
 }
 
 void Player::UpdatePosition() {

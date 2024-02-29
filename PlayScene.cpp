@@ -1,5 +1,4 @@
 #include "PlayScene.h"
-#include "Player.h"
 #include "Stage.h"
 
 //コンストラクタ
@@ -11,7 +10,6 @@ PlayScene::PlayScene(GameObject* parent)
 //初期化
 void PlayScene::Initialize() {
 	Instantiate<Stage>(this);
-	Instantiate<Player>(this);
 }
 
 //更新

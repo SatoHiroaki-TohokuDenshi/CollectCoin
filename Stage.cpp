@@ -3,6 +3,9 @@
 #include "Engine/CsvReader.h"
 #include "Engine/BoxCollider.h"
 
+#include "Player.h"
+#include "Coin.h"
+
 //コンストラクタ
 Stage::Stage(GameObject* parent)
 	: GameObject(parent, "Stage"), hModel_(-1)
@@ -36,6 +39,12 @@ void Stage::Initialize() {
 				if (map_[y][x][z] == 1) {
 					BoxCollider* collision = new BoxCollider(XMFLOAT3((float)x + 0.5f, (float)y - 0.5f, (float)z + 0.5f), XMFLOAT3(1, 1, 1));
 					AddCollider(collision);
+				}
+				else if (map_[y][x][z] == -1) {
+					Instantiate<Player>(this)->SetPosition((float)x, (float)y, (float)z);
+				}
+				else if (map_[y][x][z] == 2) {
+					Instantiate<Coin>(this)->SetPosition((float)x, (float)y, (float)z);
 				}
 			}
 		}

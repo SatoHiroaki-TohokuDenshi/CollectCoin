@@ -24,6 +24,9 @@ private:
 	//位置情報の更新
 	void UpdatePosition();
 
+	//コインのカウント
+	int countCoin_;
+
 public:
 	//コンストラクタ
 	Player(GameObject* parent);
