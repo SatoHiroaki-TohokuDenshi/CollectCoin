@@ -123,9 +123,14 @@
     <ClCompile Include="State\StateMove.cpp">
       <Filter>04State</Filter>
     </ClCompile>
-    <ClCompile Include="State\StateJump.cpp" />
-    <ClCompile Include="State\StateFall.cpp" />
     <ClCompile Include="CameraController.cpp" />
+    <ClCompile Include="TitleScene.cpp" />
+    <ClCompile Include="State\StateFall.cpp">
+      <Filter>04State</Filter>
+    </ClCompile>
+    <ClCompile Include="State\StateJump.cpp">
+      <Filter>04State</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\BoxCollider.h">
@@ -222,10 +227,17 @@
     <ClInclude Include="State\StateMove.h">
       <Filter>04State</Filter>
     </ClInclude>
-    <ClInclude Include="State\StateJump.h" />
-    <ClInclude Include="State\StateFall.h" />
-    <ClInclude Include="State\States.h" />
     <ClInclude Include="CameraController.h" />
+    <ClInclude Include="TitleScene.h" />
+    <ClInclude Include="State\StateFall.h">
+      <Filter>04State</Filter>
+    </ClInclude>
+    <ClInclude Include="State\StateJump.h">
+      <Filter>04State</Filter>
+    </ClInclude>
+    <ClInclude Include="State\States.h">
+      <Filter>04State</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Assets\Shader\Simple2D.hlsl">
