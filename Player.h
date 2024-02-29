@@ -4,6 +4,7 @@
 //前方宣言
 class StateManager;
 class CameraController;
+class Text;
 
 //Playerを管理するクラス
 class Player : public GameObject {
@@ -27,6 +28,8 @@ private:
 	//コインのカウント
 	int countCoin_;
 
+	Text* pText;
+
 public:
 	//コンストラクタ
 	Player(GameObject* parent);
@@ -49,4 +52,6 @@ public:
 	//何かに当たった
 	//引数：pTarget 当たった相手
 	void OnCollision(GameObject* pTarget) override;
+
+	void CountCoin() { countCoin_++; };
 };

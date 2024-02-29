@@ -1,6 +1,7 @@
 #include "Player.h"
 #include "Engine/Input.h"
 #include "Engine/Model.h"
+#include "Engine/Text.h"
 #include "Engine/SphereCollider.h"
 #include "State/StateManager.h"
 
@@ -16,7 +17,7 @@ Player::Player(GameObject* parent)
 	: GameObject(parent, "Player"), hModel_(-1), pStage_(nullptr)
 	, isOnFloor_(true), frame_(0), moveCount_(0, 0, 0)
 	, pManager_(new StateManager), pCamera_(nullptr)
-	, countCoin_(0)
+	, countCoin_(0), pText(nullptr)
 {
 }
 
@@ -36,6 +37,9 @@ void Player::Initialize() {
 	SphereCollider* collision = new SphereCollider(XMFLOAT3(0.5f, 0.58f, 0.5f), 0.1f);
 	AddCollider(collision);
 	pCamera_ = Instantiate<CameraController>(this);
+
+	pText = new Text();
+	pText->Initialize();
 }
 
 //XV
@@ -59,6 +63,8 @@ void Player::Update() {
 void Player::Draw() {
 	Model::SetTransform(hModel_, transform_);
 	Model::Draw(hModel_);
+
+	pText->Draw(30, 30, countCoin_);
 }
 
 //ŠJ•ú
@@ -80,9 +86,6 @@ void Player::OnCollision(GameObject* pTarget) {
 			isOnFloor_ = true;
 		}
 	}
-
-	if (pTarget->GetObjectName() == "Coin")
-		countCoin_++;
 }
 
 void Player::UpdatePosition() {

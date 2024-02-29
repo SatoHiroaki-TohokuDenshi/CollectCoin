@@ -2,6 +2,8 @@
 #include "Engine/Model.h"
 #include "Engine/SphereCollider.h"
 
+#include "Player.h"
+
 //コンストラクタ
 Coin::Coin(GameObject* parent)
 	:GameObject(parent, "Coin"), hModel_(-1) {
@@ -42,6 +44,8 @@ void Coin::Release() {
 //何かに当たった
 void Coin::OnCollision(GameObject* pTarget) {
 	//当たったときの処理
-	if (pTarget->GetObjectName() == "Player")
+	if (pTarget->GetObjectName() == "Player") {
 		KillMe();
+		((Player*)pTarget)->CountCoin();
+	}
 }
