@@ -34,7 +34,7 @@ void Player::Initialize() {
 
 	pStage_ = FindObject("Stage");
 
-	SphereCollider* collision = new SphereCollider(XMFLOAT3(0.5f, 0.58f, 0.5f), 0.1f);
+	SphereCollider* collision = new SphereCollider(XMFLOAT3(0.5f, 0.5f, 0.5f), 0.8f);
 	AddCollider(collision);
 	pCamera_ = Instantiate<CameraController>(this);
 
